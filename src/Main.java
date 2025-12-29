@@ -3,22 +3,23 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args){
         Scanner scanner = new Scanner(System.in);
-        int option;
+        int option = 0;
         ContactManager cm = new ContactManager();
 
-
-        System.out.println("=== Contact Manager ===");
-        System.out.println("1. Add Contact");
-        System.out.println("2. View All Contacts");
-        System.out.println("3. Search Contact");
-        System.out.println("4. Delete Contact");
-        System.out.println("5. Exit");
-        System.out.println("Choose option: ");
-        option = scanner.nextInt();
-        scanner.nextLine();
-
+        cm.loadFromFile();
 
         while (option != 5){
+
+            System.out.println("=== Contact Manager ===");
+            System.out.println("1. Add Contact");
+            System.out.println("2. View All Contacts");
+            System.out.println("3. Search Contact");
+            System.out.println("4. Delete Contact");
+            System.out.println("5. Exit");
+            System.out.println("Choose option: ");
+            option = scanner.nextInt();
+            scanner.nextLine();
+
             switch (option){
                 case 1:
                     System.out.println("Enter first name: ");
@@ -46,7 +47,8 @@ public class Main {
                     break;
 
                 case 5:
-                    return;
+                    cm.saveToFile();
+                    System.out.println("Goodbye!");
 
                 default:
                     System.out.println("Invalid option.");

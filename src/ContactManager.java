@@ -1,6 +1,10 @@
+import java.io.File;
+import java.io.*;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+
+import java.util.Scanner;
 
 public class ContactManager {
 
@@ -65,5 +69,41 @@ public class ContactManager {
             System.out.println("No contact with name: " + name);
         }
 
+    }
+
+    public void saveToFile(){
+        try{
+            FileWriter writer = new FileWriter("contacts.txt");
+            for (Contact c : contacts){
+                writer.write(c.getFirstName() + "," +
+                        c.getLastName() + "," +
+                        c.getPhoneNumber() + "\n");
+            }
+            writer.close();
+            System.out.println("Contacts saved successfully.");
+        } catch (IOException e) {
+            System.out.println("Error saving contacts: " + e.getMessage());
+        }
+    }
+
+    public void loadFromFile(){
+        File file = new File("contacts.txt");
+        if (!file.exists()) {
+            return;
+        }
+        Scanner scanner = new Scanner("contacts.txt");
+        while (scanner.hasNextLine()){
+            String line = scanner.nextLine();
+            String[] parts = line.split(",");
+
+            if (parts.length == 3) {
+                String firstName = parts[0];
+                String lastName = parts[1];
+                String phoneNumber = parts[2];
+                contacts.add(new Contact(firstName, lastName, phoneNumber));
+            }
+        }
+        scanner.close();
+        System.out.println("Contacts loaded successfully.");
     }
 }
