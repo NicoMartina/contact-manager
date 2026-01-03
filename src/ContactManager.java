@@ -11,9 +11,13 @@ public class ContactManager {
     ArrayList<Contact> contacts = new ArrayList<>();
 
     public void addContact(String firstName, String lastName, String number) {
-        Contact newContact = new Contact(firstName, lastName, number);
-        contacts.add(newContact);
-        System.out.println("Contact added successfully");
+        try {
+            Contact newContact = new Contact(firstName, lastName, number);
+            contacts.add(newContact);
+            System.out.println("Contact added successfully");
+        } catch (IllegalArgumentException e){
+            System.out.println("Cannot add contact: " + e.getMessage());
+        }
     }
 
     public void viewAllContacts(){

@@ -4,6 +4,15 @@ public class Contact {
     private String phoneNumber;
 
     public Contact(String firstName, String lastName, String phoneNumber) {
+        if (firstName == null || firstName.trim().isEmpty()){
+            throw new IllegalArgumentException("First Name cannot be empty");
+        }
+        if (lastName == null || lastName.trim().isEmpty()){
+            throw new IllegalArgumentException("Last name cannot be empty.");
+        }
+        if (phoneNumber == null || phoneNumber.trim().isEmpty()){
+            throw new IllegalArgumentException("Phone number cannot be empty");
+        }
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
